@@ -9,10 +9,18 @@
         let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
-                document.getElementById('ajax').innerHTML = xhr.responseText;
+                if (xhr.status === 200) {
+                    document.getElementById('ajax').innerHTML = xhr.responseText;
+                } else {
+                    alert(xhr.statusText);
+                }
             }
         };
         xhr.open('GET', 'sidebar.html');
+        function sendAJAX() {
+            xhr.send();
+            document.getElementById('load').style.display = "none";
+        }
     </script>
 </head>
 <body>
@@ -22,6 +30,7 @@
             <div class="grid-100">
                 <div class="heading">
                     <h1>Bring on the AJAX</h1>
+                    <button id="load" onclick="sendAJAX()">Bring It!</button>
                 </div>
                 <div id="ajax">
 
